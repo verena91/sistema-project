@@ -1,0 +1,70 @@
+<zk>
+	<window id="Body"
+		viewModel="@id('vm') @init('com.sistema.gestion.administracion.varios.VariosControlBody')"
+		apply="org.zkoss.bind.BindComposer" width="100%" height="100%">
+		<hbox width="100%" pack="center">
+			<vbox align="center" width="100%">
+				<groupbox title="Datos del proveedor" width="min">
+					<grid>
+						<rows>
+							<row width="100%">
+								Nombre:
+								<textbox width="500px"
+									value="@bind(vm.dto.nombre)" constraint="no empty" />
+							</row>
+							<row>
+								Descripción:
+								<textbox width="500px"
+									value="@bind(vm.dto.descripcion)" constraint="no empty" />
+							</row>
+
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox title="Datos de las Presentaciones"
+					width="min">
+					<hbox width="100%" pack="center">
+						<listbox model="@load(vm.dto.presentaciones)"
+							width="450px" selectedItem="@bind(vm.selectedPresentacion)"
+							rows="5">
+							<listhead>
+								<listheader label="Presentación"
+									sort="auto(nombre)" />
+							</listhead>
+							<template name="model" var="presentacion">
+								<listitem
+									label="@load(presentacion.nombre)" />
+							</template>
+						</listbox>
+
+						<vbox align="center" width="100%">
+							<grid>
+								<rows>
+									<row width="100%">
+										Nombre:
+										<textbox width="275px"
+											value="@bind(vm.selectedPresentacion.nombre)"
+											constraint="no empty" />
+									</row>
+									<row>
+										Descripción:
+										<textbox width="275px"
+											value="@bind(vm.selectedPresentacion.descripcion)"
+											constraint="no empty" />
+									</row>
+
+								</rows>
+							</grid>
+							<hlayout>
+								<button label="Agregar"
+									onClick="@command('agregarPresentacion')" />
+								<button label="Eliminar"
+									onClick="@command('eliminarPresentacion')" />
+							</hlayout>
+						</vbox>
+					</hbox>
+				</groupbox>
+			</vbox>
+		</hbox>
+	</window>
+</zk>

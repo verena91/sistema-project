@@ -1,0 +1,50 @@
+<zk>
+	<window id="Body"
+		viewModel="@id('vm') @init('com.sistema.gestion.cobro.CobroControlBody')"
+		apply="org.zkoss.bind.BindComposer" width="100%" height="100%">
+		<hbox width="100%" pack="center">
+			<vbox align="center" width="100%">
+				<groupbox title="Datos del cobro">
+					<vlayout sclass="z-valign-middle">
+						<grid hflex="min" sclass="no-highlight">
+							<rows>
+								<row>
+									Fecha:
+									<datebox width="200px"
+										value="@load(vm.dto.fecha)" />
+								</row>
+								<row>
+									Número recibo:
+									<textbox width="200px"
+										value="@load(vm.dto.numero)" readonly="true" />
+								</row>
+								<row>
+									Buscar venta:
+									<toolbarbutton
+										image="/core/images/find.png"
+										onClick="@command('buscarVenta')" />
+								</row>
+								<row>
+									Venta asociada:
+									<textbox width="200px"
+										value="@load(vm.dto.ventaAsociada.numero)" readonly="true" />
+								</row>
+								<row>
+									Monto:
+									<doublebox width="200px"
+										value="@load(vm.dto.monto)" />
+								</row>
+								<row>
+									Observaciones:
+									<textbox width="1110px"
+										value="@load(vm.dto.observaciones)" />
+
+								</row>
+							</rows>
+						</grid>
+					</vlayout>
+				</groupbox>
+			</vbox>
+		</hbox>
+	</window>
+</zk>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+
+	<session-config>
+		<device-type>ajax</device-type>
+		<automatic-timeout>true</automatic-timeout>
+		<timeout-uri>/core/timeout.zul</timeout-uri>
+		<!-- 60x15 = 900 = 15 minutos -->
+		<session-timeout>3600</session-timeout>
+	</session-config>
+
+
+
+	<library-property>
+		<name>org.zkoss.theme.preferred</name>
+		<value>silvertail</value>
+	</library-property>
+
+
+	<library-property>
+		<name>org.zkoss.zul.progressbox.position</name>
+		<value>center</value>
+	</library-property>
+
+	<system-config>
+		<disable-event-thread>false</disable-event-thread>
+	</system-config>
+
+	<language-config>
+		<addon-uri>/WEB-INF/lang-addon.xml</addon-uri>
+	</language-config>
+	
+	<language-config>
+		<addon-uri>/WEB-INF/lang-addon-app.xml</addon-uri>
+	</language-config>
+   
+</zk>

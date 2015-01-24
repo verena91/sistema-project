@@ -1,0 +1,83 @@
+<zk>
+	<window id="Body"
+		viewModel="@id('vm') @init('com.sistema.gestion.administracion.producto.ProductoControlBody')"
+		apply="org.zkoss.bind.BindComposer" width="100%" height="100%">
+
+		<hbox width="100%" pack="center">
+			<vbox align="center" width="100%">
+				<groupbox title="Datos del producto" width="min">
+					<grid>
+						<rows>
+							<row width="100%">
+								Código:
+								<textbox value="@bind(vm.dto.codigo)"
+									constraint="no empty" width="450px" />
+							</row>
+							<row>
+								Descripción:
+								<textbox
+									value="@bind(vm.dto.descripcion)" width="450px"
+									constraint="no empty" />
+							</row>
+							<row>
+								Cantidad:
+								<textbox value="@bind(vm.dto.cantidad)"
+									width="450px" constraint="no empty" />
+							</row>
+							<row>
+								Familia:
+								<combobox model="@load(vm.familias)"
+									width="360px" value="@load(vm.selectedFamilia.pos1)"
+									selectedItem="@bind(vm.selectedFamilia)"
+									onChange="@command('actualizarFamilia')"
+									constraint="no empty">
+									<template name="model">
+										<comboitem
+											label="@load(each.pos1)" />
+									</template>
+								</combobox>
+							</row>
+							<row>
+								Presentación:
+								<combobox
+									model="@load(vm.presentaciones)" width="360px"
+									value="@load(vm.selectedPresentacion.pos1)"
+									selectedItem="@bind(vm.selectedPresentacion)"
+									onChange="@command('actualizarPresentacion')"
+									constraint="no empty">
+									<template name="model">
+										<comboitem
+											label="@load(each.pos1)" />
+									</template>
+								</combobox>
+							</row>
+							<row>
+								Unidad de medida:
+								<combobox model="@load(vm.unidades)"
+									width="360px" value="@load(vm.selectedUnidad.text)"
+									selectedItem="@bind(vm.selectedUnidad)"
+									onChange="@command('actualizarUnidad')"
+									constraint="no empty">
+									<template name="model">
+										<comboitem
+											label="@load(each.text)" />
+									</template>
+								</combobox>
+							</row>
+							<row>
+								Costo:
+								<textbox width="450px"
+									value="@bind(vm.dto.costo)" constraint="no empty" />
+							</row>
+							<row>
+								Precio:
+								<textbox width="450px"
+									value="@bind(vm.dto.precio)" constraint="no empty" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</vbox>
+		</hbox>
+	</window>
+</zk>

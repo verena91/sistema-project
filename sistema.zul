@@ -1,0 +1,6 @@
+<?forward uri="/core/inicio/inicio.zul?title=Sistema&menu=/sistema/inicio/menu.zul&menuSistema=/sistema/inicio/menuSistema.zul&prefix=sistema" if="${true}"?>
+
+<window title="Sistema de Gestión" border="normal" width="200px">
+Bienvenidos!
+</window>
+

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-configuration-3.0.dtd"
+        [ <!ENTITY hibernate-core SYSTEM "classpath://com/coreweb/hibernate-core.cfg.xml"> ]>
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Postgres -->
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.url">jdbc:postgresql://localhost:5432/sistemadb</property>
+
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">postgres</property>
+
+		<!-- Fin Postgres -->
+
+		<!-- ===== Hibernate Core ====================== -->
+		
+		&hibernate-core;
+
+		<!-- ===== Hibernate propio del dominio ======= -->
+
+		<mapping resource="com/sistema/domain/Producto.hbm.xml" />
+		<mapping resource="com/sistema/domain/Proveedor.hbm.xml" />
+		<mapping resource="com/sistema/domain/ProveedorSucursal.hbm.xml" />
+		<mapping resource="com/sistema/domain/Cliente.hbm.xml" />
+		<mapping resource="com/sistema/domain/ClienteSucursal.hbm.xml" />
+		<mapping resource="com/sistema/domain/Compra.hbm.xml" />
+		<mapping resource="com/sistema/domain/CompraDetalle.hbm.xml" />
+		<mapping resource="com/sistema/domain/Venta.hbm.xml" />
+		<mapping resource="com/sistema/domain/VentaDetalle.hbm.xml" />
+		<mapping resource="com/sistema/domain/Devolucion.hbm.xml" />
+		<mapping resource="com/sistema/domain/DevolucionDetalle.hbm.xml" />
+		<mapping resource="com/sistema/domain/Pago.hbm.xml" />
+		<mapping resource="com/sistema/domain/Cobro.hbm.xml" />
+		<mapping resource="com/sistema/domain/Familia.hbm.xml" />
+		<mapping resource="com/sistema/domain/Presentacion.hbm.xml" />
+
+		<mapping resource="com/sistema/domain/AccesoApp.hbm.xml" />
+		<mapping resource="com/sistema/domain/RucSet.hbm.xml" />
+
+		<!-- ********************************************* -->
+		<!-- ********************************************* -->
+		<!-- ********************************************* -->
+
+	</session-factory>
+
+</hibernate-configuration>

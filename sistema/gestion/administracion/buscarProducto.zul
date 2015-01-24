@@ -1,0 +1,67 @@
+<window apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.sistema.gestion.administracion.producto.BuscarProductoControl')">
+
+	<!-- ================================== LISTADO DETALLES ============================== -->
+	<div id="buscarArticulo">
+		<listbox height="500px" model="@load(vm.productos)"
+			selectedItem="@bind(vm.selectedProducto)"
+			emptyMessage="@bind(vm.mensaje)">
+			<custom-attributes org.zkoss.zul.listbox.autoSort="true" />
+			<listhead>
+				<listheader style="text-align:center" width="100px">
+					<vlayout>
+						<label value="Código:" />
+						<textbox value="@bind(vm.filtroCodigo)"
+							width="80px" onChange="@command('cargarProductos')"
+							onOK="@command('cargarProductos')">
+						</textbox>
+					</vlayout>
+				</listheader>
+				<listheader style="text-align:center" width="200px">
+					<vlayout>
+						<label value="Descripción:" />
+						<textbox value="@bind(vm.filtroDescripcion)"
+							width="180px" onChange="@command('cargarProductos')"
+							onOK="@command('cargarProductos')">
+						</textbox>
+					</vlayout>
+				</listheader>
+				<listheader style="text-align:center" width="100px">
+					<vlayout>
+						<label value="Stock" />
+					</vlayout>
+				</listheader>
+				<listheader style="text-align:center" width="100px">
+					<vlayout>
+						<label value="Costo" />
+					</vlayout>
+				</listheader>
+				<listheader style="text-align:center" width="100px">
+					<vlayout>
+						<label value="Precio" />
+					</vlayout>
+				</listheader>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.pos1)"
+						style="color:black" />
+					<listcell label="@load(each.pos2)"
+						style="color:black" />
+					<listcell>
+						<longbox value="@load(each.pos3)"
+							readonly="true" inplace="true" />
+					</listcell>
+					<listcell>
+						<longbox value="@load(each.pos4)"
+							readonly="true" inplace="true" />
+					</listcell>
+					<listcell>
+						<longbox value="@load(each.pos5)"
+							readonly="true" inplace="true" />
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+	</div>
+</window>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//hibernate/hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd"
+        [ <!ENTITY hibernate-domain SYSTEM "classpath://com/coreweb/hibernate-domain.hbm.xml"> ]>
+
+<hibernate-mapping>
+
+	<class name="com.sistema.domain.Venta" table="Venta">
+
+		&hibernate-domain;
+
+		<property name="fecha" />
+		<property name="numero" />
+		<property name="observacion" />
+		<property name="plazo" />
+		<property name="condicionVenta" />
+
+		<many-to-one name="clienteSucursal" class="com.sistema.domain.ClienteSucursal"
+			lazy="false" column="idCliente" cascade="none" not-null="false" />
+
+		<set name="ventaDetalles" table="ventaDetalle" inverse="false"
+			lazy="false" fetch="select" cascade="all">
+			<key>
+				<column name="idVenta" not-null="false" />
+			</key>
+			<one-to-many entity-name="com.sistema.domain.VentaDetalle"></one-to-many>
+		</set>
+
+	</class>
+
+</hibernate-mapping>

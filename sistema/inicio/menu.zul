@@ -1,0 +1,71 @@
+<menubar id="menubar" width="750px" visible="@load(vm.menuVisible)">
+
+	<menu label="Administración">
+		<menupopup>
+			<zk forEach="${vm.menuItem(self,'Productos')}" />
+			<zk forEach="${vm.menuItem(self,'Clientes')}" />
+			<zk forEach="${vm.menuItem(self,'Proveedores')}" />
+			<zk forEach="${vm.menuItem(self,'Varios')}" />
+		</menupopup>
+	</menu>
+	<menu label="Ventas">
+		<menupopup>
+			<zk forEach="${vm.menuItem(self,'Venta')}" />
+			<zk forEach="${vm.menuItem(self,'Cobro')}" />
+		</menupopup>
+	</menu>
+	<menu label="Compras">
+		<menupopup>
+			<zk forEach="${vm.menuItem(self,'Compra')}" />
+			<zk forEach="${vm.menuItem(self,'Gasto')}" />
+			<zk forEach="${vm.menuItem(self,'Pago')}" />
+		</menupopup>
+	</menu>
+	<menu label="Devoluciones">
+		<menupopup>
+			<zk forEach="${vm.menuItem(self,'Solicitud')}" />
+			<zk forEach="${vm.menuItem(self,'Devolucion')}" />
+		</menupopup>
+	</menu>
+	<menu label="Inventario">
+		<menupopup>
+			<menuitem label="Movimientos" />
+		</menupopup>
+	</menu>
+	<menu label="Reportes">
+		<menupopup>
+			<menuitem label="Reporte 1" />
+			<menuitem label="Reporte 2" />
+			<menuitem label="Reporte 3" />
+		</menupopup>
+	</menu>
+
+	<menu label="Tablero">
+		<menupopup>
+			<menuitem label="Ir..."
+				onClick='principalBody.src = "/core/inicio/okLogin.zul";
+				nombreFormulario.value="&#160;" ' />
+			<menu label="Panel de Control">
+				<menupopup>
+					<zk forEach="${vm.menuItem(self,'UsuarioABM')}" />
+					<!-- <menuseparator />
+						<menu label="Seguridad">
+						<menupopup>
+						<menuitem
+						forEach="${vm.menuItem(self,'Backup')}" />
+						<menuitem disabled="true"
+						label="Restaurar Sistema" onClick="alert(self.label)" />
+						</menupopup>
+						</menu>  -->
+				</menupopup>
+			</menu>
+			<menuseparator></menuseparator>
+			<menuitem label="Logearse al sistema"
+				onClick='principalBody.src = "/core/inicio/login.zul";' />
+			<menuitem label="Salir"
+				onClick='principalBody.src = "/core/inicio/login.zul";' />
+		</menupopup>
+	</menu>
+
+</menubar>
+

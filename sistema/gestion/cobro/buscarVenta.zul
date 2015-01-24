@@ -1,0 +1,56 @@
+<window apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.sistema.gestion.cobro.BuscarVentaControl')">
+
+	<!-- ================================== LISTADO DETALLES ============================== -->
+	<div id="buscarVenta">
+		<listbox height="500px" model="@load(vm.ventas)"
+			selectedItem="@bind(vm.selectedVenta)"
+			emptyMessage="@bind(vm.mensaje)">
+			<custom-attributes org.zkoss.zul.listbox.autoSort="true" />
+			<listhead>
+				<listheader style="text-align:center" width="200px">
+					<vlayout>
+						<label value="Fecha" />
+					</vlayout>
+				</listheader>
+				<listheader style="text-align:center" width="100px">
+					<vlayout>
+						<label value="Condicion" />
+					</vlayout>
+				</listheader>
+				<listheader style="text-align:center" width="100px">
+					<vlayout>
+						<label value="Número:" />
+						<textbox value="@bind(vm.filtroNumero)"
+							width="80px" onChange="@command('cargarVentas')"
+							onOK="@command('cargarVentas')">
+						</textbox>
+					</vlayout>
+				</listheader>
+				<listheader style="text-align:center" width="200px">
+					<vlayout>
+						<label value="Cliente:" />
+						<textbox value="@bind(vm.filtroCliente)"
+							width="180px" onChange="@command('cargarVentas')"
+							onOK="@command('cargarVentas')">
+						</textbox>
+					</vlayout>
+				</listheader>
+
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.fecha)"
+						style="color:black" />
+					<listcell label="@load(each.condicionVenta)"
+						style="color:black" />
+					<listcell label="@load(each.numero)"
+						style="color:black" />
+					<listcell label="@load(each.clienteSucursal.nombre)"
+						style="color:black" />
+
+				</listitem>
+			</template>
+		</listbox>
+	</div>
+</window>

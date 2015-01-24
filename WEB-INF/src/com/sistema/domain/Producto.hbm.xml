@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//hibernate/hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd"
+        [ <!ENTITY hibernate-domain SYSTEM "classpath://com/coreweb/hibernate-domain.hbm.xml"> ]
+        >
+
+<hibernate-mapping>
+
+	<class name="com.sistema.domain.Producto" table="Producto">
+
+		&hibernate-domain;
+
+		<property name="codigo" />
+		<property name="descripcion" />
+		<property name="imagen" />
+		<property name="costo" />
+		<property name="precio" />
+		<property name="cantidad" />
+
+		<many-to-one name="presentacion" class="com.sistema.domain.Presentacion"
+			lazy="false" column="idPresentacion" cascade="none" not-null="false" />
+
+		<many-to-one name="unidadDeMedida" class="com.coreweb.domain.Tipo"
+			lazy="false" column="idUnidadDeMedida" cascade="none" not-null="false" />
+
+		<many-to-one name="familia" class="com.sistema.domain.Familia"
+			lazy="false" column="idFamilia" cascade="none" not-null="false" />
+
+	</class>
+
+</hibernate-mapping>

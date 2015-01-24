@@ -1,0 +1,220 @@
+<zk>
+	<window id="Body"
+		viewModel="@id('vm') @init('com.sistema.gestion.compra.CompraControlBody')"
+		apply="org.zkoss.bind.BindComposer" width="100%" height="100%">
+
+		<vlayout>
+			<!-- ======================================= CABECERA =====================================  -->
+			<vlayout>
+				<hlayout>
+					<groupbox title="Datos de la compra">
+						<vlayout sclass="z-valign-middle">
+							<grid sclass="no-highlight">
+								<rows>
+									<row>
+										<vlayout spacing="0">
+											Fecha:
+											<datebox width="200px"
+												value="@load(vm.dto.fecha)" />
+										</vlayout>
+										<vlayout spacing="0">
+											Número:
+											<textbox width="200px"
+												value="@load(vm.dto.numero)" readonly="true" />
+										</vlayout>
+										<vlayout spacing="0">
+											Condición compra:
+											<radiogroup width="200px"
+												model="@load(vm.miUtilDto.condiciones)"
+												selectedItem="@bind(vm.selectedCondicion)"
+												onChange="@command('actualizarCondicion')">
+												<template
+													name="model">
+													<radio
+														label="@load(each.text)" value="@load(each)" />
+												</template>
+											</radiogroup>
+										</vlayout>
+										<vlayout spacing="0">
+											Plazo:
+											<textbox width="200px"
+												value="@load(vm.dto.plazo)" />
+										</vlayout>
+										<vlayout spacing="0">
+											Tipo compra:
+											<textbox width="200px"
+												value="@load(vm.dto.tipoCompra)" />
+										</vlayout>
+									</row>
+									<row>
+										<vlayout spacing="0">
+											RUC:
+											<textbox
+												value="@bind(vm.ruc)" width="200px"
+												onChange="@command('actualizarSucursales')" />
+										</vlayout>
+										<vlayout spacing="0">
+											Sucursal:
+											<combobox
+												model="@load(vm.sucursales)" width="200px"
+												value="@load(vm.selectedProveedorSucursal.nombre)"
+												selectedItem="@bind(vm.selectedProveedorSucursal)"
+												onChange="@command('actualizarProveedorSucursal')">
+												<template
+													name="model">
+													<comboitem
+														label="@load(each.nombre)" />
+												</template>
+											</combobox>
+										</vlayout>
+										<cell colspan="2">
+											<vlayout spacing="0">
+												Razón Social:
+												<textbox width="445px"
+													value="@load(vm.selectedProveedor.razonSocial)"
+													readonly="true" />
+											</vlayout>
+										</cell>
+									</row>
+									<row>
+										<cell colspan="2">
+											<vlayout spacing="0">
+												Direccion:
+												<textbox width="445px"
+													value="@load(vm.selectedProveedorSucursal.direccion)"
+													readonly="true" />
+											</vlayout>
+										</cell>
+										<cell colspan="2">
+											<vlayout spacing="0">
+												Teléfono:
+												<textbox width="445px"
+													value="@load(vm.selectedProveedorSucursal.telefono)"
+													readonly="true" />
+											</vlayout>
+										</cell>
+									</row>
+									<row>
+										<cell colspan="4">
+											<vlayout spacing="0">
+												Observaciones:
+												<textbox width="930px"
+													value="@load(vm.dto.observacion)" />
+											</vlayout>
+										</cell>
+									</row>
+								</rows>
+							</grid>
+						</vlayout>
+					</groupbox>
+				</hlayout>
+			</vlayout>
+
+			<div sclass="button-container">
+
+				<toolbarbutton label="Eliminar producto"
+					image="/core/images/borrarItem.png"
+					onClick="@command('eliminarItem')" />
+				<space />
+				<toolbarbutton label="Insertar producto"
+					image="/core/images/insertar.png"
+					onClick="@command('insertarItemDetalle')" />
+				<space />
+				<toolbarbutton label="Calcular total"
+					image="/core/images/calculadora.png"
+					onClick="@command('calcularTotal')" />
+				<space />
+				<toolbarbutton label="Reporte"
+					image="/core/images/pdf.png"
+					onClick="@command('reporteTransferencia')"
+					disabled="@load(!vm.siempreHabilitado)" />
+			</div>
+
+
+			<!-- ======================================================================================  -->
+
+			<!-- ======================================= DETALLE ======================================  -->
+			<listbox model="@load(vm.dto.compraDetalles)"
+				height="230px">
+				<listhead menupopup="auto">
+					<listheader width="50px" align="center">
+						<checkbox checked="@bind(vm.checked)"
+							onCheck="@command('seleccionarTodosDetalle')" />
+					</listheader>
+					<listheader label="Código" style="text-align:center"
+						width="130px" />
+					<listheader label="Descripción"
+						style="text-align:center" width="300px" />
+					<listheader label="Cantidad"
+						style="text-align:center" width="100px" />
+					<listheader label="Costo unitario"
+						style="text-align:center" width="100px" />
+					<listheader label="Exentas"
+						style="text-align:center" width="100px" />
+					<listheader label="Gravadas 5"
+						style="text-align:center" width="100px" />
+					<listheader label="Gravadas 10"
+						style="text-align:center" width="100px" />
+
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell>
+							<checkbox checked="@bind(each.checked)" />
+						</listcell>
+						<listcell>
+							<textbox inplace="true"
+								value="@load(each.producto.codigo)" />
+						</listcell>
+						<listcell>
+							<textbox inplace="true"
+								value="@load(each.producto.descripcion)" width="320px" />
+						</listcell>
+						<listcell>
+							<longbox inplace="true"
+								value="@bind(each.cantidad)"
+								onChange="@command('validarCantidadPedida',d=each)" />
+						</listcell>
+						<listcell>
+							<longbox inplace="true"
+								value="@load(each.costoFinal)" />
+						</listcell>
+						<listcell>
+							<longbox inplace="true"
+								value="@bind(each.montoExentas)" />
+						</listcell>
+						<listcell>
+							<longbox inplace="true"
+								value="@bind(each.montoGravadasCinco)" />
+						</listcell>
+						<listcell>
+							<longbox inplace="true"
+								value="@bind(each.montoGravadasDiez)" />
+						</listcell>
+					</listitem>
+				</template>
+				<listfoot>
+					<listfooter span="9" align="right">
+						<hlayout sclass="z-valign-bottom">
+							<label value="Total a pagar"
+								sclass="label-moneda-footer" />
+							<textbox sclass="footer-input"
+								readonly="true" value="@load(vm.total)" width="105px" />
+							<space width="2px" />
+							<label value="Gs."
+								sclass="label-moneda-footer" />
+						</hlayout>
+					</listfooter>
+				</listfoot>
+
+			</listbox>
+
+			<!-- ======================================================================================  -->
+		</vlayout>
+	</window>
+	<style>
+		.no-highlight tr.z-grid-odd td.z-row-inner,tr.z-grid-odd
+		.z-cell,tr.z-grid-odd, .no-highlight tr.z-row-over >
+		td.z-row-inner { background:white; }
+	</style>
+</zk>
